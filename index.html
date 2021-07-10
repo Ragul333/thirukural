@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>Thirukural</title>
+    <style>
+        body {
+            background-image: url('/bekky-bekks-ZiG6GmNlfeI-unsplash.jpg');
+            background-position: center;
+            background-repeat: repeat-x;
+        }
+
+        .card {
+            box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            transition: all .55s ease-in-out;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            h5,
+            h6,
+            p {
+                font-size: small
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto" style="margin-top: 20%;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="line1"></h5>
+                        <h5 class="card-title" id="line2"></h5>
+                        <br />
+                        <h6 class="card-subtitle mb-2 text-muted" id="tamil_exp"></h6>
+                        <br />
+                        <h6 class="card-subtitle mb-2 text-muted" id="eng_exp"></h6>
+                        <p class="card-text" id="card-text"></p>
+                        <br />
+                        <p class="text-muted text-right">(Refresh the page for a random thirukkural)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Js include -->
+    <script>
+        const quote = async (num) => {
+            const url = await fetch(`https://api-thirukkural.vercel.app/api?num=${num}`)
+            const data = await url.json();
+            console.log(data)
+            let line1 = document.getElementById('line1');
+            line1.innerHTML = `"${data.line1}`
+            let line2 = document.getElementById('line2');
+            line2.innerHTML = `&nbsp;${data.line2} "`
+            let tamil_exp = document.getElementById('tamil_exp');
+            tamil_exp.innerHTML = `<b>பொருள் :</b> <br/>${data.tam_exp}`
+            let eng_exp = document.getElementById('eng_exp');
+            eng_exp.innerHTML = `<b>Meaning :</b> <br/>${data.eng_exp}`
+        }
+
+        quote(Math.floor(Math.random() * 1330) + 1);
+    </script>
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
